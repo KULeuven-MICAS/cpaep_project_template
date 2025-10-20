@@ -18,3 +18,7 @@ pkg-config = "*"
 # Optional: handy for Python-driven flows
 python = "3.11.*"
 pytest = "*"
+
+[tasks]
+# Quick version check
+verilator-version = "verilator --version"

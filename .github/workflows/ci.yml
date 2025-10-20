@@ -20,7 +20,18 @@ jobs:
           # optional: pin a version e.g. '0.24.1'
           pixi-version: 'latest'
           cache: true
+          activate-environment: true
 
       # Verify verilator version
       - name: Verify Verilator (task)
         run: pixi run verilator-version
+
+      # Run simple test
+      - name: Build MAC PE
+        run: |
+          make TEST_MODULE=tb_mac_pe all
+
+      # Run simple test
+      - name: Run MAC PE test
+        run: |
+          ./bin/tb_mac_pe

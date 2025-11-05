@@ -106,7 +106,7 @@ module gemm_controller #(
       ControllerBusy: begin
         move_counter = input_valid_i;
         // Check if we are done
-        if (last_counter_last_value && input_valid_i) begin
+        if (last_counter_last_value) begin
           next_state = ControllerFinish;
         end
         // Check when result_valid_o should be asserted

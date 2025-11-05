@@ -15,9 +15,11 @@ cxx-compiler = "*"
 make = "*"
 pkg-config = "*"
 
+
 # Optional: handy for Python-driven flows
 python = "3.11.*"
 pytest = "*"
+numpy = "*"
 
 [tasks]
 # Quick version check

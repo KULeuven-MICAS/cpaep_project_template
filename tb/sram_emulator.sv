@@ -1,12 +1,10 @@
 module sram_emulator #(
   parameter int unsigned NumWords     = 32'd1024, // Number of Words in data array
   parameter int unsigned DataWidth    = 32'd128,  // Data signal width
-  parameter int unsigned ByteWidth    = 32'd8,    // Width of a data byte
-  parameter int unsigned NumPorts     = 32'd2,    // Number of read and write ports
-  parameter int unsigned Latency      = 32'd1,    // Latency when the read data is available
-  parameter              SimInit      = "none",   // Simulation initialization
-  parameter bit          PrintSimCfg  = 1'b0,     // Print configuration
-  parameter              ImplKey      = "none",   // Reference to specific implementation
+  parameter int unsigned ByteWidth    = 32'd8,    // Width of a data byte: This defines the granularity of the write byte enable
+  parameter int unsigned NumPorts     = 32'd1,    // Number of read and write ports: Do not  use values other than 1 in this project
+  parameter int unsigned Latency      = 32'd0,    // Latency when the read data is available: Do not use values other than 0 in this project
+  parameter              SimInit      = "zeros",  // Simulation initialization: Do not modify this parameter in this project
   // DEPENDENT PARAMETERS, DO NOT OVERWRITE!
   parameter int unsigned AddrWidth = (NumWords > 32'd1) ? $clog2(NumWords) : 32'd1,
   parameter int unsigned BeWidth   = (DataWidth + ByteWidth - 32'd1) / ByteWidth, // ceil_div
@@ -160,22 +158,6 @@ module sram_emulator #(
     assert (DataWidth >= 32'd1) else $fatal(1, "DataWidth has to be > 0");
     assert (ByteWidth >= 32'd1) else $fatal(1, "ByteWidth has to be > 0");
     assert (NumPorts  >= 32'd1) else $fatal(1, "The number of ports must be at least 1!");
-  end
-  initial begin: p_sim_hello
-    if (PrintSimCfg) begin
-      $display("#################################################################################");
-      $display("tc_sram functional instantiated with the configuration:"                          );
-      $display("Instance: %m"                                                                     );
-      $display("Number of ports   (dec): %0d", NumPorts                                           );
-      $display("Number of words   (dec): %0d", NumWords                                           );
-      $display("Address width     (dec): %0d", AddrWidth                                          );
-      $display("Data width        (dec): %0d", DataWidth                                          );
-      $display("Byte width        (dec): %0d", ByteWidth                                          );
-      $display("Byte enable width (dec): %0d", BeWidth                                            );
-      $display("Latency Cycles    (dec): %0d", Latency                                            );
-      $display("Simulation init   (str): %0s", SimInit                                            );
-      $display("#################################################################################");
-    end
   end
   for (genvar i = 0; i < NumPorts; i++) begin : gen_assertions
     assert property ( @(posedge clk_i) disable iff (!rst_ni)

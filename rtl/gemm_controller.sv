@@ -98,8 +98,8 @@ module gemm_controller #(
     case (current_state)
       ControllerIdle: begin
         if (start_i) begin
-          clear_counters = 1'b1;
-          next_state = ControllerBusy;
+          move_counter = input_valid_i;
+          next_state   = ControllerBusy;
         end
       end
 
@@ -110,7 +110,7 @@ module gemm_controller #(
           next_state = ControllerFinish;
         end
         // Check when result_valid_o should be asserted
-        if (input_valid_i && K_count_o != '0 && N_count_o != '0) begin
+        if (input_valid_i && K_count_o == '0 && (M_count_o != '0 || N_count_o != '0)) begin
           result_valid_o = 1'b1;
         end
       end
@@ -118,6 +118,7 @@ module gemm_controller #(
       ControllerFinish: begin
         done_o = 1'b1;
         result_valid_o = 1'b1;
+        clear_counters = 1'b1;
         next_state = ControllerIdle;
       end
 

@@ -1,9 +1,9 @@
 # ==== CONFIGURABLE VARIABLES ====
 VERILATOR       := verilator
 
-TEST_MODULE     := tb_counter
+TEST_MODULE     := tb_mac_pe
 
-INCLUDE_DIRS    := +incdir+tb
+INCLUDE_DIRS    := +incdir+.
 
 FLIST_DIRS		:= flists
 FILELIST        := $(TEST_MODULE).flist

@@ -19,12 +19,12 @@ module tb_mac_pe;
   logic [2*DATA_WIDTH-1:0] c_o;
 
   // Include some common tasks
-  `include "common_tasks.sv"
+  `include "includes/common_tasks.svh"
 
   // Instantiate the MAC PE module
   mac_pe #(
       .DataWidthA(DATA_WIDTH),
-      .DataWidthB(DATA_WIDTH),
+      .DataWidthB(DATA_WIDTH)
   ) i_mac_pe (
       .clk_i    (clk_i),
       .rst_ni   (rst_ni),

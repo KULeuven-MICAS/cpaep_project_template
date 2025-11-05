@@ -26,12 +26,14 @@ jobs:
       - name: Verify Verilator (task)
         run: pixi run verilator-version
 
-      # Run simple test
-      - name: Build MAC PE
+      # Run MAC PE test
+      - name: MAC PE test
         run: |
           make TEST_MODULE=tb_mac_pe all
+          ./bin/tb_mac_pe
 
       # Run simple test
-      - name: Run MAC PE test
+      - name: One MAC GeMM test
         run: |
-          ./bin/tb_mac_pe
+          make TEST_MODULE=tb_one_mac_gemm all
+          ./bin/tb_one_mac_gemm

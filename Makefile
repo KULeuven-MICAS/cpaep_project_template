@@ -9,13 +9,14 @@ FLIST_DIRS		:= flists
 FILELIST        := $(TEST_MODULE).flist
 FILE_PATH 		:= $(FLIST_DIRS)/$(FILELIST)
 
-VLT_FLAGS       := -O0
+VLT_FLAGS       := -O3
 VLT_FLAGS       += --trace
 VLT_FLAGS	    += --trace-structs
 
 VLT_WAIVE 		:= -Wno-CASEINCOMPLETE
 VLT_WAIVE 		+= -Wno-WIDTHTRUNC
 VLT_WAIVE 		+= -Wno-WIDTHEXPAND
+VLT_WAIVE 		+= -Wno-fatal
 
 BIN_DIR			:= bin
 OBJ_DIR         := obj_dir

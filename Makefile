@@ -1,7 +1,7 @@
 # ==== CONFIGURABLE VARIABLES ====
 VERILATOR       := verilator
 
-TEST_MODULE     := tb_mac_pe
+TEST_MODULE     := tb_one_mac_gemm
 
 INCLUDE_DIRS    := +incdir+.
 

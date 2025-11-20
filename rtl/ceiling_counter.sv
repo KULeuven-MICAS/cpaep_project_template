@@ -5,16 +5,16 @@
 // Author: Yunhao Deng <yunhao.deng@kuleuven.be>
 
 module ceiling_counter #(
-    parameter int Width      = 8,
-    parameter int HasCeiling = 1
+  parameter int Width      = 8,
+  parameter int HasCeiling = 1
 ) (
-    input  logic             clk_i,
-    input  logic             rst_ni,       // active-low async reset
-    input  logic             tick_i,
-    input  logic             clear_i,      // active-high sync clear
-    input  logic [Width-1:0] ceiling_i,
-    output logic [Width-1:0] count_o,
-    output logic             last_value_o
+  input  logic             clk_i,
+  input  logic             rst_ni,       // active-low async reset
+  input  logic             tick_i,
+  input  logic             clear_i,      // active-high sync clear
+  input  logic [Width-1:0] ceiling_i,
+  output logic [Width-1:0] count_o,
+  output logic             last_value_o
 );
 
   always_ff @(posedge clk_i or negedge rst_ni) begin
@@ -28,7 +28,8 @@ module ceiling_counter #(
       // Only update on tick
       if (HasCeiling) begin
         // Compare against (ceiling_i - 1)
-        if (count_o < (ceiling_i - 1'b1)) count_o <= count_o + 1'b1;
+        if (count_o < (ceiling_i - 1'b1))
+          count_o <= count_o + 1'b1;
         else count_o <= '0;
       end else begin
         // Free-running counter

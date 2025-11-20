@@ -42,7 +42,7 @@ $(BIN_DIR)/$(TEST_MODULE): $(BIN_DIR) $(FILE_PATH)
 questasim.do: $(FILE_PATH)
 	@echo 'Generating $@'
 	@echo vlib work > $@
-	@echo vlog +cover -sv -f $(FILE_PATH) $(INCLUDE_DIRS) >> $@
+	@echo vlog +cover +acc -sv -f $(FILE_PATH) $(INCLUDE_DIRS) >> $@
 	@echo vsim $(QST_FLAGS) work.$(TEST_MODULE) >> $@
 	@echo add wave -r \/\* >> $@
 	@echo run -all >> $@

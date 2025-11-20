@@ -4,7 +4,7 @@
 
 // Author: Yunhao Deng <yunhao.deng@kuleuven.be>
 
-module BasicCeilingCounter #(
+module ceiling_counter #(
     parameter int Width      = 8,
     parameter int HasCeiling = 1
 ) (

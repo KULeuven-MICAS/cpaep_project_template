@@ -18,6 +18,9 @@ VLT_WAIVE 		+= -Wno-WIDTHTRUNC
 VLT_WAIVE 		+= -Wno-WIDTHEXPAND
 VLT_WAIVE 		+= -Wno-fatal
 
+QST_FLAGS	    := -voptargs=\"+acc\"
+QST_FLAGS	    += -coverage
+
 BIN_DIR			:= bin
 OBJ_DIR         := obj_dir
 
@@ -39,8 +42,8 @@ $(BIN_DIR)/$(TEST_MODULE): $(BIN_DIR) $(FILE_PATH)
 questasim.do: $(FILE_PATH)
 	@echo 'Generating $@'
 	@echo vlib work > $@
-	@echo vlog -sv -f $(FILE_PATH) $(INCLUDE_DIRS) >> $@
-	@echo vsim -voptargs=\"+acc\" work.$(TEST_MODULE) >> $@
+	@echo vlog +cover -sv -f $(FILE_PATH) $(INCLUDE_DIRS) >> $@
+	@echo vsim $(QST_FLAGS) work.$(TEST_MODULE) >> $@
 	@echo add wave -r \/\* >> $@
 	@echo run -all >> $@
 
@@ -54,6 +57,6 @@ questasim-run-gui: questasim.do
 
 # ==== CLEAN ====
 clean:
-	rm -rf $(OBJ_DIR) $(BIN_DIR) *.vcd transcript *.do work *.wlf
+	rm -rf $(OBJ_DIR) $(BIN_DIR) *.vcd transcript *.do work *.wlf *covhtmlreport *report.txt
 
 .PHONY: all clean questasim.do

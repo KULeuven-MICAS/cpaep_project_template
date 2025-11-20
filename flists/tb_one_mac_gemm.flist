@@ -1,5 +1,5 @@
 rtl/mac_pe.sv
-rtl/BasicCeilingCounter.sv
+rtl/ceiling_counter.sv
 rtl/gemm_controller.sv
 rtl/gemm_accelerator_top.sv
 

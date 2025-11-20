@@ -27,7 +27,7 @@ module gemm_controller #(
   logic last_counter_last_value;
 
   // K Counter
-  BasicCeilingCounter #(
+  ceiling_counter #(
       .Width(AddrWidth),
       .HasCeiling(1)
   ) i_K_counter (
@@ -41,7 +41,7 @@ module gemm_controller #(
   );
 
   // N Counter
-  BasicCeilingCounter #(
+  ceiling_counter #(
       .Width(AddrWidth),
       .HasCeiling(1)
   ) i_N_counter (
@@ -55,7 +55,7 @@ module gemm_controller #(
   );
 
   // M Counter
-  BasicCeilingCounter #(
+  ceiling_counter #(
       .Width(AddrWidth),
       .HasCeiling(1)
   ) i_M_counter (

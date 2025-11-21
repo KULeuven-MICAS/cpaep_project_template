@@ -159,7 +159,7 @@ module tb_gemm_top;
 
   task automatic verify_result_c(
     input logic signed [OutDataWidth-1:0] Y_o [4608],
-    input boolean fatal_on_mismatch,
+    input logic fatal_on_mismatch
   );
     begin
       // Compare with SRAM C contents
@@ -216,7 +216,7 @@ module tb_gemm_top;
       clk_delay(3);
 
       start_and_wait_gemm();
-      verify_result_c(Y_memory);
+      verify_result_c(Y_memory, 0);
 
       clk_delay(5);
     end

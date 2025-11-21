@@ -7,6 +7,7 @@ module gemm_controller #(
     input  logic start_i,
     input  logic input_valid_i,
     output logic result_valid_o,
+    output logic busy_o,
     output logic done_o,
 
     // The current M, K, N sizes
@@ -40,6 +41,8 @@ module gemm_controller #(
   } controller_state_t;
 
   controller_state_t current_state, next_state;
+
+  assign busy_o = (current_state == ControllerBusy) || (current_state == ControllerFinish);
 
   //-----------------------
   // Counters for M, K, N
